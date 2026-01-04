@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700">
+  <style>
+    text { font-family: 'Noto Sans JP', sans-serif; }
+    .title { font-size: 18px; font-weight: bold; fill: #333; }
+    .subtitle { font-size: 14px; fill: #666; }
+    .label { font-size: 12px; fill: #333; }
+    .code { font-family: monospace; font-size: 11px; fill: #e74c3c; }
+    .box-title { fill: #3498db; }
+    .box-list { fill: #2ecc71; }
+    .arrow { fill: #e74c3c; }
+  </style>
+
+  <!-- 背景 -->
+  <rect width="900" height="700" fill="#fafafa"/>
+  
+  <!-- ヘッダー -->
+  <text x="450" y="35" text-anchor="middle" class="title" font-size="22">writing-mode と flex-direction の関係</text>
+
+  <!-- ===== セクション1: 横書き + row ===== -->
+  <g transform="translate(50, 70)">
+    <text x="0" y="0" class="title">① 横書き + flex-direction: row</text>
+    <text x="0" y="20" class="code">writing-mode: なし / flex-direction: row</text>
+    
+    <rect x="0" y="35" width="350" height="80" fill="#fff" stroke="#ddd" rx="5"/>
+    
+    <!-- タイトルボックス -->
+    <rect x="20" y="50" width="100" height="50" class="box-title" rx="3"/>
+    <text x="70" y="80" text-anchor="middle" fill="#fff" font-size="14">タイトル</text>
+    
+    <!-- リストボックス -->
+    <rect x="140" y="50" width="180" height="50" class="box-list" rx="3"/>
+    <text x="230" y="80" text-anchor="middle" fill="#fff" font-size="14">ニュースリスト</text>
+    
+    <!-- 矢印 -->
+    <path d="M 20 130 L 320 130 L 310 125 M 320 130 L 310 135" stroke="#e74c3c" fill="none" stroke-width="2"/>
+    <text x="170" y="150" text-anchor="middle" class="label" fill="#e74c3c">左 → 右 に並ぶ</text>
+  </g>
+
+  <!-- ===== セクション2: 横書き + row-reverse ===== -->
+  <g transform="translate(480, 70)">
+    <text x="0" y="0" class="title">② 横書き + flex-direction: row-reverse</text>
+    <text x="0" y="20" class="code">writing-mode: なし / flex-direction: row-reverse</text>
+    
+    <rect x="0" y="35" width="350" height="80" fill="#fff" stroke="#ddd" rx="5"/>
+    
+    <!-- リストボックス（左に来る） -->
+    <rect x="20" y="50" width="180" height="50" class="box-list" rx="3"/>
+    <text x="110" y="80" text-anchor="middle" fill="#fff" font-size="14">ニュースリスト</text>
+    
+    <!-- タイトルボックス（右に来る） -->
+    <rect x="220" y="50" width="100" height="50" class="box-title" rx="3"/>
+    <text x="270" y="80" text-anchor="middle" fill="#fff" font-size="14">タイトル</text>
+    
+    <!-- 矢印 -->
+    <path d="M 320 130 L 20 130 L 30 125 M 20 130 L 30 135" stroke="#e74c3c" fill="none" stroke-width="2"/>
+    <text x="170" y="150" text-anchor="middle" class="label" fill="#e74c3c">右 → 左 に並ぶ（反転）</text>
+  </g>
+
+  <!-- ===== セクション3: 縦書き（親に設定）===== -->
+  <g transform="translate(50, 260)">
+    <text x="0" y="0" class="title">③ 親に縦書き + row-reverse（❌ 混乱する）</text>
+    <text x="0" y="20" class="code">.news_area { writing-mode: vertical-rl; flex-direction: row-reverse; }</text>
+    
+    <rect x="0" y="35" width="350" height="160" fill="#fff" stroke="#e74c3c" rx="5" stroke-width="2"/>
+    
+    <!-- 縦書きのタイトル -->
+    <rect x="280" y="50" width="50" height="130" class="box-title" rx="3"/>
+    <text x="305" y="90" text-anchor="middle" fill="#fff" font-size="12" writing-mode="vertical-rl">タイトル</text>
+    
+    <!-- 縦書きのリスト -->
+    <rect x="100" y="50" width="160" height="130" class="box-list" rx="3"/>
+    <text x="180" y="90" text-anchor="middle" fill="#fff" font-size="12" writing-mode="vertical-rl">ニュースリスト</text>
+    
+    <text x="175" y="215" text-anchor="middle" class="label" fill="#e74c3c" font-size="14">⚠️ 軸の方向が変わって予測しづらい</text>
+  </g>
+
+  <!-- ===== セクション4: 正解パターン ===== -->
+  <g transform="translate(480, 260)">
+    <text x="0" y="0" class="title">④ 子だけ縦書き + row-reverse（✅ 正解）</text>
+    <text x="0" y="20" class="code">.news_area { flex-direction: row-reverse; } /* 横書きのまま */</text>
+    <text x="0" y="35" class="code">.news_title, .news_wrapper { writing-mode: vertical-rl; }</text>
+    
+    <rect x="0" y="50" width="380" height="145" fill="#fff" stroke="#2ecc71" rx="5" stroke-width="3"/>
+    
+    <!-- 横書きコンテナ内に縦書き要素 -->
+    <!-- リスト（左側） -->
+    <rect x="20" y="65" width="200" height="115" class="box-list" rx="3"/>
+    <text x="60" y="100" fill="#fff" font-size="11" writing-mode="vertical-rl">2024.06.01</text>
+    <text x="85" y="100" fill="#fff" font-size="11" writing-mode="vertical-rl">ホームページを...</text>
+    <text x="120" y="100" fill="#fff" font-size="11" writing-mode="vertical-rl">2024.05.15</text>
+    <text x="145" y="100" fill="#fff" font-size="11" writing-mode="vertical-rl">新商品...</text>
+    
+    <!-- タイトル（右側） -->
+    <rect x="250" y="65" width="110" height="115" class="box-title" rx="3"/>
+    <text x="280" y="90" fill="#fff" font-size="10" writing-mode="vertical-rl">News</text>
+    <text x="310" y="85" fill="#fff" font-size="16" writing-mode="vertical-rl">お知らせ</text>
+    
+    <text x="190" y="215" text-anchor="middle" class="label" fill="#2ecc71" font-size="14">✅ 親は横書き、子だけ縦書き = シンプル！</text>
+  </g>
+
+  <!-- ===== 解説セクション ===== -->
+  <g transform="translate(50, 480)">
+    <rect x="0" y="0" width="800" height="200" fill="#fff3cd" stroke="#ffc107" rx="8"/>
+    
+    <text x="20" y="30" class="title" font-size="16">💡 ポイント</text>
+    
+    <text x="20" y="60" class="label" font-size="14">• writing-mode を親に設定すると、flex の軸の方向も変わってしまう</text>
+    <text x="20" y="85" class="label" font-size="14">• 「row」なのに縦に並んだり、予測しづらい動きになる</text>
+    
+    <text x="20" y="120" class="title" font-size="16" fill="#2ecc71">✅ 解決策</text>
+    <text x="20" y="150" class="label" font-size="14">• 親要素（.news_area）は 横書きのまま flex で配置</text>
+    <text x="20" y="175" class="label" font-size="14">• 子要素（.news_title, .news_wrapper）だけ writing-mode: vertical-rl で縦書きにする</text>
+  </g>
+
+</svg>

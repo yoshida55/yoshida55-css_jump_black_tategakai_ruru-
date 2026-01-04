@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550">
+  <style>
+    text { font-family: sans-serif; }
+  </style>
+
+  <!-- 背景 -->
+  <rect width="800" height="550" fill="#f5f5f5"/>
+  
+  <!-- タイトル -->
+  <text x="400" y="40" text-anchor="middle" font-size="24" font-weight="bold" fill="#333">縦書きレイアウトの正解</text>
+
+  <!-- ===== 失敗パターン ===== -->
+  <g transform="translate(50, 80)">
+    <!-- ヘッダー -->
+    <rect x="0" y="0" width="300" height="40" fill="#e74c3c" rx="5"/>
+    <text x="150" y="27" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">❌ 失敗</text>
+    
+    <!-- コード -->
+    <rect x="0" y="50" width="300" height="110" fill="#2c3e50" rx="5"/>
+    <text x="15" y="75" fill="#e74c3c" font-family="monospace" font-size="12">.news_area {</text>
+    <text x="15" y="95" fill="#f39c12" font-family="monospace" font-size="12">  writing-mode: vertical-rl;</text>
+    <text x="15" y="115" fill="#fff" font-family="monospace" font-size="12">  display: flex;</text>
+    <text x="15" y="135" fill="#fff" font-family="monospace" font-size="12">  flex-direction: row-reverse;</text>
+    <text x="15" y="155" fill="#e74c3c" font-family="monospace" font-size="12">}</text>
+    
+    <!-- 説明 -->
+    <rect x="0" y="170" width="300" height="60" fill="#fff" stroke="#e74c3c" stroke-width="2" rx="5"/>
+    <text x="150" y="195" text-anchor="middle" fill="#333" font-size="14">親で縦書き</text>
+    <text x="150" y="218" text-anchor="middle" fill="#e74c3c" font-size="14">→ flex軸も回転して狂う</text>
+    
+    <!-- 図 -->
+    <rect x="50" y="250" width="200" height="100" fill="#fff" stroke="#e74c3c" stroke-width="2" rx="5"/>
+    <text x="150" y="280" text-anchor="middle" fill="#e74c3c" font-size="14">親 .news_area</text>
+    <text x="150" y="300" text-anchor="middle" fill="#e74c3c" font-size="11">writing-mode + flex</text>
+    <text x="150" y="330" text-anchor="middle" fill="#999" font-size="24">😵 予測不能</text>
+  </g>
+
+  <!-- ===== 正解パターン ===== -->
+  <g transform="translate(450, 80)">
+    <!-- ヘッダー -->
+    <rect x="0" y="0" width="300" height="40" fill="#2ecc71" rx="5"/>
+    <text x="150" y="27" text-anchor="middle" fill="#fff" font-size="18" font-weight="bold">✅ 正解</text>
+    
+    <!-- コード -->
+    <rect x="0" y="50" width="300" height="155" fill="#2c3e50" rx="5"/>
+    <text x="15" y="75" fill="#2ecc71" font-family="monospace" font-size="12">.news_area {</text>
+    <text x="15" y="95" fill="#fff" font-family="monospace" font-size="12">  display: flex;</text>
+    <text x="15" y="115" fill="#fff" font-family="monospace" font-size="12">  flex-direction: row-reverse;</text>
+    <text x="15" y="135" fill="#2ecc71" font-family="monospace" font-size="12">}</text>
+    <text x="15" y="160" fill="#3498db" font-family="monospace" font-size="12">.news_title, .news_wrapper {</text>
+    <text x="15" y="180" fill="#f39c12" font-family="monospace" font-size="12">  writing-mode: vertical-rl;</text>
+    <text x="15" y="200" fill="#3498db" font-family="monospace" font-size="12">}</text>
+    
+    <!-- 説明 -->
+    <rect x="0" y="215" width="300" height="60" fill="#fff" stroke="#2ecc71" stroke-width="2" rx="5"/>
+    <text x="150" y="240" text-anchor="middle" fill="#333" font-size="14">親は配置だけ、子で縦書き</text>
+    <text x="150" y="263" text-anchor="middle" fill="#2ecc71" font-size="14">→ flexはそのまま動く</text>
+    
+    <!-- 図 -->
+    <rect x="20" y="290" width="260" height="100" fill="#fff" stroke="#2ecc71" stroke-width="2" rx="5"/>
+    <text x="150" y="315" text-anchor="middle" fill="#2ecc71" font-size="12">親 .news_area（横書き+flex）</text>
+    
+    <!-- 子要素 -->
+    <rect x="40" y="330" width="80" height="45" fill="#3498db" rx="3"/>
+    <text x="80" y="358" text-anchor="middle" fill="#fff" font-size="10">子：縦書き</text>
+    
+    <rect x="140" y="330" width="120" height="45" fill="#9b59b6" rx="3"/>
+    <text x="200" y="358" text-anchor="middle" fill="#fff" font-size="10">子：縦書き</text>
+  </g>
+
+  <!-- ===== 結論 ===== -->
+  <rect x="50" y="470" width="700" height="60" fill="#fff3cd" stroke="#ffc107" stroke-width="2" rx="8"/>
+  <text x="400" y="500" text-anchor="middle" font-size="18" font-weight="bold" fill="#333">親 → 配置（flex）　｜　子 → 文字の向き（writing-mode）</text>
+  <text x="400" y="520" text-anchor="middle" font-size="14" fill="#666">役割を分ける！</text>
+
+</svg>
